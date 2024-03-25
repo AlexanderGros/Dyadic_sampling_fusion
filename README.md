@@ -5,7 +5,7 @@ For additional information see the Poster : Poster_MdC_AG.pdf
 The initial code can be found under: dyadic_s_fusion.py
 
 The used Dataset is the Machine-Learning Challenge [CSPB.ML.2018] of Chad Spooners cyclostationary.blog.
-The Dataset is originally composed of matlab binary .tim files, these have been aggregated converted to the more common .h5 file called spooner_full.h5 in the code.
+The Dataset is originally composed of matlab binary .tim files, these have been aggregated and converted to the more common .h5 file called spooner_full.h5 in the code.
 
 @misc{cyclo2,
 author = {Spooner, Chad},
