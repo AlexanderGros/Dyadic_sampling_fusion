@@ -1,4 +1,5 @@
 This repository investigates the possibility to improve Automatic Modulation Classification (AMC) by using Dyadic filtering of IQ signals in combination with AI.
+
 For additional information see the Poster : Poster_MdC_AG.pdf
 
 The initial code can be found under: dyadic_s_fusion.py
