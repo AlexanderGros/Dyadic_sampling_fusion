@@ -1,0 +1,50 @@
+  1) releases/2021b
+job start at Sat Mar 23 19:32:20 CET 2024
+2024-03-23 19:32:23.495742: I tensorflow/compiler/jit/xla_cpu_device.cc:41] Not creating XLA devices, tf_xla_enable_xla_devices not set
+2024-03-23 19:32:23.496555: I tensorflow/core/common_runtime/process_util.cc:146] Creating new thread pool with default inter op setting: 2. Tune using inter_op_parallelism_threads for best performance.
+ 
+first y shape:  (112000, 8)
+datagenerator definition successfull
+start AI architecture definition
+Traceback (most recent call last):
+  File "/opt/cecisw/arch/easybuild/2020b/software/TensorFlow/2.4.1-foss-2020b/lib/python3.8/site-packages/tensorflow/python/framework/ops.py", line 1853, in _create_c_op
+    c_op = pywrap_tf_session.TF_FinishOperation(op_desc)
+tensorflow.python.framework.errors_impl.InvalidArgumentError: Negative dimension size caused by subtracting 4 from 1 for '{{node conv2d_11/Conv2D}} = Conv2D[T=DT_FLOAT, data_format="NHWC", dilations=[1, 1, 1, 1], explicit_paddings=[], padding="VALID", strides=[1, 1, 1, 1], use_cudnn_on_gpu=true](Placeholder, conv2d_11/Conv2D/ReadVariableOp)' with input shapes: [?,1,1,30], [1,4,30,10].
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "dyadic_s_fusion_2.py", line 319, in <module>
+    x = Convolution2D(10, (1, 4), padding='valid', activation="relu", kernel_initializer='glorot_uniform')(x)
+  File "/opt/cecisw/arch/easybuild/2020b/software/TensorFlow/2.4.1-foss-2020b/lib/python3.8/site-packages/tensorflow/python/keras/engine/base_layer.py", line 951, in __call__
+    return self._functional_construction_call(inputs, args, kwargs,
+  File "/opt/cecisw/arch/easybuild/2020b/software/TensorFlow/2.4.1-foss-2020b/lib/python3.8/site-packages/tensorflow/python/keras/engine/base_layer.py", line 1090, in _functional_construction_call
+    outputs = self._keras_tensor_symbolic_call(
+  File "/opt/cecisw/arch/easybuild/2020b/software/TensorFlow/2.4.1-foss-2020b/lib/python3.8/site-packages/tensorflow/python/keras/engine/base_layer.py", line 822, in _keras_tensor_symbolic_call
+    return self._infer_output_signature(inputs, args, kwargs, input_masks)
+  File "/opt/cecisw/arch/easybuild/2020b/software/TensorFlow/2.4.1-foss-2020b/lib/python3.8/site-packages/tensorflow/python/keras/engine/base_layer.py", line 863, in _infer_output_signature
+    outputs = call_fn(inputs, *args, **kwargs)
+  File "/opt/cecisw/arch/easybuild/2020b/software/TensorFlow/2.4.1-foss-2020b/lib/python3.8/site-packages/tensorflow/python/keras/layers/convolutional.py", line 248, in call
+    outputs = self._convolution_op(inputs, self.kernel)
+  File "/opt/cecisw/arch/easybuild/2020b/software/TensorFlow/2.4.1-foss-2020b/lib/python3.8/site-packages/tensorflow/python/util/dispatch.py", line 201, in wrapper
+    return target(*args, **kwargs)
+  File "/opt/cecisw/arch/easybuild/2020b/software/TensorFlow/2.4.1-foss-2020b/lib/python3.8/site-packages/tensorflow/python/ops/nn_ops.py", line 1013, in convolution_v2
+    return convolution_internal(
+  File "/opt/cecisw/arch/easybuild/2020b/software/TensorFlow/2.4.1-foss-2020b/lib/python3.8/site-packages/tensorflow/python/ops/nn_ops.py", line 1143, in convolution_internal
+    return op(
+  File "/opt/cecisw/arch/easybuild/2020b/software/TensorFlow/2.4.1-foss-2020b/lib/python3.8/site-packages/tensorflow/python/ops/nn_ops.py", line 2597, in _conv2d_expanded_batch
+    return gen_nn_ops.conv2d(
+  File "/opt/cecisw/arch/easybuild/2020b/software/TensorFlow/2.4.1-foss-2020b/lib/python3.8/site-packages/tensorflow/python/ops/gen_nn_ops.py", line 969, in conv2d
+    _, _, _op, _outputs = _op_def_library._apply_op_helper(
+  File "/opt/cecisw/arch/easybuild/2020b/software/TensorFlow/2.4.1-foss-2020b/lib/python3.8/site-packages/tensorflow/python/framework/op_def_library.py", line 748, in _apply_op_helper
+    op = g._create_op_internal(op_type_name, inputs, dtypes=None,
+  File "/opt/cecisw/arch/easybuild/2020b/software/TensorFlow/2.4.1-foss-2020b/lib/python3.8/site-packages/tensorflow/python/framework/func_graph.py", line 590, in _create_op_internal
+    return super(FuncGraph, self)._create_op_internal(  # pylint: disable=protected-access
+  File "/opt/cecisw/arch/easybuild/2020b/software/TensorFlow/2.4.1-foss-2020b/lib/python3.8/site-packages/tensorflow/python/framework/ops.py", line 3528, in _create_op_internal
+    ret = Operation(
+  File "/opt/cecisw/arch/easybuild/2020b/software/TensorFlow/2.4.1-foss-2020b/lib/python3.8/site-packages/tensorflow/python/framework/ops.py", line 2015, in __init__
+    self._c_op = _create_c_op(self._graph, node_def, inputs,
+  File "/opt/cecisw/arch/easybuild/2020b/software/TensorFlow/2.4.1-foss-2020b/lib/python3.8/site-packages/tensorflow/python/framework/ops.py", line 1856, in _create_c_op
+    raise ValueError(str(e))
+ValueError: Negative dimension size caused by subtracting 4 from 1 for '{{node conv2d_11/Conv2D}} = Conv2D[T=DT_FLOAT, data_format="NHWC", dilations=[1, 1, 1, 1], explicit_paddings=[], padding="VALID", strides=[1, 1, 1, 1], use_cudnn_on_gpu=true](Placeholder, conv2d_11/Conv2D/ReadVariableOp)' with input shapes: [?,1,1,30], [1,4,30,10].
+job end at Sat Mar 23 19:32:24 CET 2024

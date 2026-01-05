@@ -1,0 +1,198 @@
+  1) releases/2021b
+job start at Fri Mar 22 08:20:01 CET 2024
+2024-03-22 08:20:26.136402: I tensorflow/compiler/jit/xla_cpu_device.cc:41] Not creating XLA devices, tf_xla_enable_xla_devices not set
+2024-03-22 08:20:26.137428: I tensorflow/core/common_runtime/process_util.cc:146] Creating new thread pool with default inter op setting: 2. Tune using inter_op_parallelism_threads for best performance.
+2024-03-22 08:20:27.390545: I tensorflow/compiler/mlir/mlir_graph_optimization_pass.cc:116] None of the MLIR optimization passes are enabled (registered 2)
+2024-03-22 08:20:27.391025: I tensorflow/core/platform/profile_utils/cpu_utils.cc:112] CPU Frequency: 2600000000 Hz
+ 
+first y shape:  (112000, 8)
+datagenerator definition successfull
+start AI architecture definition
+Model: "model"
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
+input1 (InputLayer)             [(None, 2, 8192, 1)] 0                                            
+__________________________________________________________________________________________________
+input2 (InputLayer)             [(None, 2, 4096, 1)] 0                                            
+__________________________________________________________________________________________________
+input3 (InputLayer)             [(None, 2, 2048, 1)] 0                                            
+__________________________________________________________________________________________________
+input4 (InputLayer)             [(None, 2, 1024, 1)] 0                                            
+__________________________________________________________________________________________________
+input5 (InputLayer)             [(None, 2, 512, 1)]  0                                            
+__________________________________________________________________________________________________
+input6 (InputLayer)             [(None, 2, 256, 1)]  0                                            
+__________________________________________________________________________________________________
+conv2d (Conv2D)                 (None, 1, 8185, 40)  680         input1[0][0]                     
+__________________________________________________________________________________________________
+conv2d_2 (Conv2D)               (None, 1, 4089, 40)  680         input2[0][0]                     
+__________________________________________________________________________________________________
+conv2d_4 (Conv2D)               (None, 1, 2041, 40)  680         input3[0][0]                     
+__________________________________________________________________________________________________
+conv2d_6 (Conv2D)               (None, 1, 1017, 40)  680         input4[0][0]                     
+__________________________________________________________________________________________________
+conv2d_8 (Conv2D)               (None, 1, 505, 40)   680         input5[0][0]                     
+__________________________________________________________________________________________________
+conv2d_10 (Conv2D)              (None, 1, 249, 30)   510         input6[0][0]                     
+__________________________________________________________________________________________________
+dropout (Dropout)               (None, 1, 8185, 40)  0           conv2d[0][0]                     
+__________________________________________________________________________________________________
+dropout_2 (Dropout)             (None, 1, 4089, 40)  0           conv2d_2[0][0]                   
+__________________________________________________________________________________________________
+dropout_4 (Dropout)             (None, 1, 2041, 40)  0           conv2d_4[0][0]                   
+__________________________________________________________________________________________________
+dropout_6 (Dropout)             (None, 1, 1017, 40)  0           conv2d_6[0][0]                   
+__________________________________________________________________________________________________
+dropout_8 (Dropout)             (None, 1, 505, 40)   0           conv2d_8[0][0]                   
+__________________________________________________________________________________________________
+dropout_10 (Dropout)            (None, 1, 249, 30)   0           conv2d_10[0][0]                  
+__________________________________________________________________________________________________
+conv2d_1 (Conv2D)               (None, 1, 8182, 10)  1610        dropout[0][0]                    
+__________________________________________________________________________________________________
+conv2d_3 (Conv2D)               (None, 1, 4086, 10)  1610        dropout_2[0][0]                  
+__________________________________________________________________________________________________
+conv2d_5 (Conv2D)               (None, 1, 2038, 10)  1610        dropout_4[0][0]                  
+__________________________________________________________________________________________________
+conv2d_7 (Conv2D)               (None, 1, 1014, 10)  1610        dropout_6[0][0]                  
+__________________________________________________________________________________________________
+conv2d_9 (Conv2D)               (None, 1, 502, 40)   6440        dropout_8[0][0]                  
+__________________________________________________________________________________________________
+conv2d_11 (Conv2D)              (None, 1, 246, 10)   1210        dropout_10[0][0]                 
+__________________________________________________________________________________________________
+dropout_1 (Dropout)             (None, 1, 8182, 10)  0           conv2d_1[0][0]                   
+__________________________________________________________________________________________________
+dropout_3 (Dropout)             (None, 1, 4086, 10)  0           conv2d_3[0][0]                   
+__________________________________________________________________________________________________
+dropout_5 (Dropout)             (None, 1, 2038, 10)  0           conv2d_5[0][0]                   
+__________________________________________________________________________________________________
+dropout_7 (Dropout)             (None, 1, 1014, 10)  0           conv2d_7[0][0]                   
+__________________________________________________________________________________________________
+dropout_9 (Dropout)             (None, 1, 502, 40)   0           conv2d_9[0][0]                   
+__________________________________________________________________________________________________
+dropout_11 (Dropout)            (None, 1, 246, 10)   0           conv2d_11[0][0]                  
+__________________________________________________________________________________________________
+flatten (Flatten)               (None, 81820)        0           dropout_1[0][0]                  
+__________________________________________________________________________________________________
+flatten_1 (Flatten)             (None, 40860)        0           dropout_3[0][0]                  
+__________________________________________________________________________________________________
+flatten_2 (Flatten)             (None, 20380)        0           dropout_5[0][0]                  
+__________________________________________________________________________________________________
+flatten_3 (Flatten)             (None, 10140)        0           dropout_7[0][0]                  
+__________________________________________________________________________________________________
+flatten_4 (Flatten)             (None, 20080)        0           dropout_9[0][0]                  
+__________________________________________________________________________________________________
+flatten_5 (Flatten)             (None, 2460)         0           dropout_11[0][0]                 
+__________________________________________________________________________________________________
+concatenate (Concatenate)       (None, 175740)       0           flatten[0][0]                    
+                                                                 flatten_1[0][0]                  
+                                                                 flatten_2[0][0]                  
+                                                                 flatten_3[0][0]                  
+                                                                 flatten_4[0][0]                  
+                                                                 flatten_5[0][0]                  
+__________________________________________________________________________________________________
+dense1 (Dense)                  (None, 128)          22494848    concatenate[0][0]                
+__________________________________________________________________________________________________
+dense2 (Dense)                  (None, 8)            1032        dense1[0][0]                     
+__________________________________________________________________________________________________
+reshape (Reshape)               (None, 8)            0           dense2[0][0]                     
+==================================================================================================
+Total params: 22,513,880
+Trainable params: 22,513,880
+Non-trainable params: 0
+__________________________________________________________________________________________________
+end of architecture
+ 
+Training start
+Epoch 1/100
+2450/2450 - 2685s - loss: 2.8482 - accuracy: 0.2641 - val_loss: 1.4261 - val_accuracy: 0.4037
+2024-03-22 09:05:13.401767: W tensorflow/python/util/util.cc:348] Sets are not currently considered sequences, but this may change in the future, so consider avoiding using them.
+
+Epoch 00001: val_loss improved from inf to 1.42614, saving model to ./weights_folder/fusion_8192
+Epoch 2/100
+2450/2450 - 2661s - loss: 1.2722 - accuracy: 0.4786 - val_loss: 1.1420 - val_accuracy: 0.5325
+
+Epoch 00002: val_loss improved from 1.42614 to 1.14197, saving model to ./weights_folder/fusion_8192
+Epoch 3/100
+2450/2450 - 2660s - loss: 1.0634 - accuracy: 0.5809 - val_loss: 0.9848 - val_accuracy: 0.6205
+
+Epoch 00003: val_loss improved from 1.14197 to 0.98482, saving model to ./weights_folder/fusion_8192
+Epoch 4/100
+2450/2450 - 2681s - loss: 0.8411 - accuracy: 0.6804 - val_loss: 0.8133 - val_accuracy: 0.6881
+
+Epoch 00004: val_loss improved from 0.98482 to 0.81328, saving model to ./weights_folder/fusion_8192
+Epoch 5/100
+2450/2450 - 2614s - loss: 0.6606 - accuracy: 0.7540 - val_loss: 0.6603 - val_accuracy: 0.7513
+
+Epoch 00005: val_loss improved from 0.81328 to 0.66030, saving model to ./weights_folder/fusion_8192
+Epoch 6/100
+2450/2450 - 2517s - loss: 0.5214 - accuracy: 0.8086 - val_loss: 0.6020 - val_accuracy: 0.7754
+
+Epoch 00006: val_loss improved from 0.66030 to 0.60203, saving model to ./weights_folder/fusion_8192
+Epoch 7/100
+2450/2450 - 2608s - loss: 0.4066 - accuracy: 0.8538 - val_loss: 0.5713 - val_accuracy: 0.7854
+
+Epoch 00007: val_loss improved from 0.60203 to 0.57129, saving model to ./weights_folder/fusion_8192
+Epoch 8/100
+2450/2450 - 2344s - loss: 0.3346 - accuracy: 0.8807 - val_loss: 0.4668 - val_accuracy: 0.8332
+
+Epoch 00008: val_loss improved from 0.57129 to 0.46679, saving model to ./weights_folder/fusion_8192
+Epoch 9/100
+2450/2450 - 2097s - loss: 0.2732 - accuracy: 0.9051 - val_loss: 0.4744 - val_accuracy: 0.8282
+
+Epoch 00009: val_loss did not improve from 0.46679
+Epoch 10/100
+2450/2450 - 2105s - loss: 0.2393 - accuracy: 0.9166 - val_loss: 0.6461 - val_accuracy: 0.7829
+
+Epoch 00010: val_loss did not improve from 0.46679
+Epoch 11/100
+2450/2450 - 2166s - loss: 0.1981 - accuracy: 0.9324 - val_loss: 0.5551 - val_accuracy: 0.8108
+
+Epoch 00011: val_loss did not improve from 0.46679
+Epoch 12/100
+2450/2450 - 2191s - loss: 0.1806 - accuracy: 0.9384 - val_loss: 0.3895 - val_accuracy: 0.8646
+
+Epoch 00012: val_loss improved from 0.46679 to 0.38947, saving model to ./weights_folder/fusion_8192
+Epoch 13/100
+2450/2450 - 2448s - loss: 0.1590 - accuracy: 0.9457 - val_loss: 0.4680 - val_accuracy: 0.8384
+
+Epoch 00013: val_loss did not improve from 0.38947
+Epoch 14/100
+2450/2450 - 2463s - loss: 0.1416 - accuracy: 0.9528 - val_loss: 0.4718 - val_accuracy: 0.8449
+
+Epoch 00014: val_loss did not improve from 0.38947
+Epoch 15/100
+2450/2450 - 2480s - loss: 0.1390 - accuracy: 0.9539 - val_loss: 0.3768 - val_accuracy: 0.8715
+
+Epoch 00015: val_loss improved from 0.38947 to 0.37675, saving model to ./weights_folder/fusion_8192
+Epoch 16/100
+2450/2450 - 2481s - loss: 0.1266 - accuracy: 0.9582 - val_loss: 0.4592 - val_accuracy: 0.8495
+
+Epoch 00016: val_loss did not improve from 0.37675
+Epoch 17/100
+2450/2450 - 2505s - loss: 0.1199 - accuracy: 0.9614 - val_loss: 0.3821 - val_accuracy: 0.8717
+
+Epoch 00017: val_loss did not improve from 0.37675
+Epoch 18/100
+2450/2450 - 2592s - loss: 0.1095 - accuracy: 0.9652 - val_loss: 0.3638 - val_accuracy: 0.8776
+
+Epoch 00018: val_loss improved from 0.37675 to 0.36383, saving model to ./weights_folder/fusion_8192
+Epoch 19/100
+2450/2450 - 2566s - loss: 0.1102 - accuracy: 0.9654 - val_loss: 0.3778 - val_accuracy: 0.8708
+
+Epoch 00019: val_loss did not improve from 0.36383
+Epoch 20/100
+2450/2450 - 2579s - loss: 0.1017 - accuracy: 0.9672 - val_loss: 0.6754 - val_accuracy: 0.7973
+
+Epoch 00020: val_loss did not improve from 0.36383
+Epoch 21/100
+2450/2450 - 2595s - loss: 0.0953 - accuracy: 0.9688 - val_loss: 0.3445 - val_accuracy: 0.8812
+
+Epoch 00021: val_loss improved from 0.36383 to 0.34453, saving model to ./weights_folder/fusion_8192
+Epoch 22/100
+2450/2450 - 2599s - loss: 0.0926 - accuracy: 0.9709 - val_loss: 0.8404 - val_accuracy: 0.7418
+
+Epoch 00022: val_loss did not improve from 0.34453
+Epoch 23/100
+2450/2450 - 2603s - loss: 0.0877 - accuracy: 0.9719 - val_loss: 0.4723 - val_accuracy: 0.8607
+slurmstepd: error: *** JOB 1342321 ON drg2-w017 CANCELLED AT 2024-03-23T00:35:05 DUE TO TIME LIMIT ***

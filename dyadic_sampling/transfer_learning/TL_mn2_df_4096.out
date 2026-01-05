@@ -1,0 +1,171 @@
+job start at Fri Oct 11 11:21:19 CEST 2024
+2024-10-11 11:21:23.677411: I external/local_xla/xla/tsl/cuda/cudart_stub.cc:32] Could not find cuda drivers on your machine, GPU will not be used.
+2024-10-11 11:21:23.681616: I external/local_xla/xla/tsl/cuda/cudart_stub.cc:32] Could not find cuda drivers on your machine, GPU will not be used.
+2024-10-11 11:21:23.692976: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:485] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+2024-10-11 11:21:23.712016: E external/local_xla/xla/stream_executor/cuda/cuda_dnn.cc:8454] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+2024-10-11 11:21:23.717352: E external/local_xla/xla/stream_executor/cuda/cuda_blas.cc:1452] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+2024-10-11 11:21:23.732393: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2024-10-11 11:21:27.224677: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+/CECI/home/users/a/g/agros/dyadic_sampling/transfer_learning/dyadic_tl.py:234: UserWarning: `input_shape` is undefined or non-square, or `rows` is not in [96, 128, 160, 192, 224]. Weights for input shape (224, 224) will be loaded as the default.
+  base_model = MobileNetV2(input_shape=(64, vec_len, 3), include_top=False, weights='imagenet', name=instance_name)  # 3 channels for RGB
+ 
+first y shape:  (112000, 8)
+datagenerator definition successfull
+start AI architecture definition
+np shape: (None, 2, 4096, 1)
+np shape: (None, 2, 2048, 1)
+np shape: (None, 2, 1024, 1)
+np shape: (None, 2, 512, 1)
+np shape: (None, 2, 256, 1)
+np shape: (None, 2, 128, 1)
+Model: "functional"
+┏━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┓
+┃ Layer (type)        ┃ Output Shape      ┃    Param # ┃ Connected to      ┃
+┡━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━┩
+│ input1 (InputLayer) │ (None, 2, 4096,   │          0 │ -                 │
+│                     │ 1)                │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ input2 (InputLayer) │ (None, 2, 2048,   │          0 │ -                 │
+│                     │ 1)                │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ input3 (InputLayer) │ (None, 2, 1024,   │          0 │ -                 │
+│                     │ 1)                │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ input4 (InputLayer) │ (None, 2, 512, 1) │          0 │ -                 │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ input5 (InputLayer) │ (None, 2, 256, 1) │          0 │ -                 │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ input6 (InputLayer) │ (None, 2, 128, 1) │          0 │ -                 │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d (Conv2D)     │ (None, 2, 4096,   │         96 │ input1[0][0]      │
+│                     │ 32)               │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_1 (Conv2D)   │ (None, 2, 2048,   │         96 │ input2[0][0]      │
+│                     │ 32)               │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_2 (Conv2D)   │ (None, 2, 1024,   │         96 │ input3[0][0]      │
+│                     │ 32)               │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_3 (Conv2D)   │ (None, 2, 512,    │         96 │ input4[0][0]      │
+│                     │ 32)               │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_4 (Conv2D)   │ (None, 2, 256,    │         96 │ input5[0][0]      │
+│                     │ 32)               │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_5 (Conv2D)   │ (None, 2, 128,    │         96 │ input6[0][0]      │
+│                     │ 32)               │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ reshape (Reshape)   │ (None, 64, 4096,  │          0 │ conv2d[0][0]      │
+│                     │ 1)                │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ reshape_1 (Reshape) │ (None, 64, 2048,  │          0 │ conv2d_1[0][0]    │
+│                     │ 1)                │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ reshape_2 (Reshape) │ (None, 64, 1024,  │          0 │ conv2d_2[0][0]    │
+│                     │ 1)                │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ reshape_3 (Reshape) │ (None, 64, 512,   │          0 │ conv2d_3[0][0]    │
+│                     │ 1)                │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ reshape_4 (Reshape) │ (None, 64, 256,   │          0 │ conv2d_4[0][0]    │
+│                     │ 1)                │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ reshape_5 (Reshape) │ (None, 64, 128,   │          0 │ conv2d_5[0][0]    │
+│                     │ 1)                │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ concatenate         │ (None, 64, 4096,  │          0 │ reshape[0][0],    │
+│ (Concatenate)       │ 3)                │            │ reshape[0][0],    │
+│                     │                   │            │ reshape[0][0]     │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ concatenate_1       │ (None, 64, 2048,  │          0 │ reshape_1[0][0],  │
+│ (Concatenate)       │ 3)                │            │ reshape_1[0][0],  │
+│                     │                   │            │ reshape_1[0][0]   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ concatenate_2       │ (None, 64, 1024,  │          0 │ reshape_2[0][0],  │
+│ (Concatenate)       │ 3)                │            │ reshape_2[0][0],  │
+│                     │                   │            │ reshape_2[0][0]   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ concatenate_3       │ (None, 64, 512,   │          0 │ reshape_3[0][0],  │
+│ (Concatenate)       │ 3)                │            │ reshape_3[0][0],  │
+│                     │                   │            │ reshape_3[0][0]   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ concatenate_4       │ (None, 64, 256,   │          0 │ reshape_4[0][0],  │
+│ (Concatenate)       │ 3)                │            │ reshape_4[0][0],  │
+│                     │                   │            │ reshape_4[0][0]   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ concatenate_5       │ (None, 64, 128,   │          0 │ reshape_5[0][0],  │
+│ (Concatenate)       │ 3)                │            │ reshape_5[0][0],  │
+│                     │                   │            │ reshape_5[0][0]   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ mobilenetv2_1       │ (None, 2, 128,    │  2,257,984 │ concatenate[0][0] │
+│ (Functional)        │ 1280)             │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ mobilenetv2_2       │ (None, 2, 64,     │  2,257,984 │ concatenate_1[0]… │
+│ (Functional)        │ 1280)             │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ mobilenetv2_3       │ (None, 2, 32,     │  2,257,984 │ concatenate_2[0]… │
+│ (Functional)        │ 1280)             │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ mobilenetv2_4       │ (None, 2, 16,     │  2,257,984 │ concatenate_3[0]… │
+│ (Functional)        │ 1280)             │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ mobilenetv2_5       │ (None, 2, 8,      │  2,257,984 │ concatenate_4[0]… │
+│ (Functional)        │ 1280)             │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ mobilenetv2_6       │ (None, 2, 4,      │  2,257,984 │ concatenate_5[0]… │
+│ (Functional)        │ 1280)             │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ global_average_poo… │ (None, 1280)      │          0 │ mobilenetv2_1[0]… │
+│ (GlobalAveragePool… │                   │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ global_average_poo… │ (None, 1280)      │          0 │ mobilenetv2_2[0]… │
+│ (GlobalAveragePool… │                   │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ global_average_poo… │ (None, 1280)      │          0 │ mobilenetv2_3[0]… │
+│ (GlobalAveragePool… │                   │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ global_average_poo… │ (None, 1280)      │          0 │ mobilenetv2_4[0]… │
+│ (GlobalAveragePool… │                   │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ global_average_poo… │ (None, 1280)      │          0 │ mobilenetv2_5[0]… │
+│ (GlobalAveragePool… │                   │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ global_average_poo… │ (None, 1280)      │          0 │ mobilenetv2_6[0]… │
+│ (GlobalAveragePool… │                   │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ concatenate_6       │ (None, 7680)      │          0 │ global_average_p… │
+│ (Concatenate)       │                   │            │ global_average_p… │
+│                     │                   │            │ global_average_p… │
+│                     │                   │            │ global_average_p… │
+│                     │                   │            │ global_average_p… │
+│                     │                   │            │ global_average_p… │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ dense1 (Dense)      │ (None, 256)       │  1,966,336 │ concatenate_6[0]… │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ dense2 (Dense)      │ (None, 8)         │      2,056 │ dense1[0][0]      │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ reshape_6 (Reshape) │ (None, 8)         │          0 │ dense2[0][0]      │
+└─────────────────────┴───────────────────┴────────────┴───────────────────┘
+ Total params: 15,516,872 (59.19 MB)
+ Trainable params: 15,312,200 (58.41 MB)
+ Non-trainable params: 204,672 (799.50 KB)
+end of architecture
+ 
+Training start
+Epoch 1/100
+/home/umons/eletel/agros/.local/lib/python3.11/site-packages/keras/src/trainers/data_adapters/py_dataset_adapter.py:122: UserWarning: Your `PyDataset` class should call `super().__init__(**kwargs)` in its constructor. `**kwargs` can include `workers`, `use_multiprocessing`, `max_queue_size`. Do not pass these arguments to `fit()`, as they will be ignored.
+  self._warn_if_super_not_called()
+
+Epoch 1: val_loss improved from inf to 3.45910, saving model to ./weights_folder/TL_mn2_df_4096.keras
+2450/2450 - 175738s - 72s/step - accuracy: 0.4402 - loss: 1.1793 - val_accuracy: 0.1098 - val_loss: 3.4591
+Epoch 2/100
+2024-10-13 12:10:33.193654: I tensorflow/core/framework/local_rendezvous.cc:404] Local rendezvous is aborting with status: OUT_OF_RANGE: End of sequence
+	 [[{{node IteratorGetNext}}]]
+/opt/sw/arch/easybuild/2023a/softwares/Python/3.11.3-GCCcore-12.3.0/lib/python3.11/contextlib.py:155: UserWarning: Your input ran out of data; interrupting training. Make sure that your dataset or generator can generate at least `steps_per_epoch * epochs` batches. You may need to use the `.repeat()` function when building your dataset.
+  self.gen.throw(typ, value, traceback)
+
+Epoch 2: val_loss did not improve from 3.45910
+2450/2450 - 9724s - 4s/step - accuracy: 0.0000e+00 - loss: 0.0000e+00 - val_accuracy: 0.1098 - val_loss: 3.4591
+Epoch 3/100
+slurmstepd: error: *** JOB 106286 ON drg2-w001 CANCELLED AT 2024-10-14T19:36:41 DUE TO TIME LIMIT ***

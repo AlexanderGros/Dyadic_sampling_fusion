@@ -1,0 +1,156 @@
+job start at Wed Nov 13 11:45:34 CET 2024
+2024-11-13 11:45:36.901052: I external/local_xla/xla/tsl/cuda/cudart_stub.cc:32] Could not find cuda drivers on your machine, GPU will not be used.
+2024-11-13 11:45:36.905340: I external/local_xla/xla/tsl/cuda/cudart_stub.cc:32] Could not find cuda drivers on your machine, GPU will not be used.
+2024-11-13 11:45:36.917618: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:485] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+2024-11-13 11:45:36.939407: E external/local_xla/xla/stream_executor/cuda/cuda_dnn.cc:8454] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+2024-11-13 11:45:36.945251: E external/local_xla/xla/stream_executor/cuda/cuda_blas.cc:1452] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+2024-11-13 11:45:36.961510: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2024-11-13 11:45:38.816566: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+ 
+first y shape:  (112000, 8)
+datagenerator definition successfull
+start AI architecture definition
+Model: "functional"
+┏━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━┓
+┃ Layer (type)        ┃ Output Shape      ┃    Param # ┃ Connected to      ┃
+┡━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━┩
+│ input1 (InputLayer) │ (None, 2, 512, 1) │          0 │ -                 │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ input2 (InputLayer) │ (None, 2, 256, 1) │          0 │ -                 │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ input3 (InputLayer) │ (None, 2, 128, 1) │          0 │ -                 │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ input4 (InputLayer) │ (None, 2, 64, 1)  │          0 │ -                 │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ input5 (InputLayer) │ (None, 2, 32, 1)  │          0 │ -                 │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ input6 (InputLayer) │ (None, 2, 16, 1)  │          0 │ -                 │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d (Conv2D)     │ (None, 1, 505,    │        680 │ input1[0][0]      │
+│                     │ 40)               │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_2 (Conv2D)   │ (None, 1, 249,    │        680 │ input2[0][0]      │
+│                     │ 40)               │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_4 (Conv2D)   │ (None, 1, 121,    │        680 │ input3[0][0]      │
+│                     │ 40)               │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_6 (Conv2D)   │ (None, 1, 57, 40) │        680 │ input4[0][0]      │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_8 (Conv2D)   │ (None, 1, 25, 40) │        680 │ input5[0][0]      │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_10 (Conv2D)  │ (None, 1, 9, 40)  │        680 │ input6[0][0]      │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ dropout (Dropout)   │ (None, 1, 505,    │          0 │ conv2d[0][0]      │
+│                     │ 40)               │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ dropout_2 (Dropout) │ (None, 1, 249,    │          0 │ conv2d_2[0][0]    │
+│                     │ 40)               │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ dropout_4 (Dropout) │ (None, 1, 121,    │          0 │ conv2d_4[0][0]    │
+│                     │ 40)               │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ dropout_6 (Dropout) │ (None, 1, 57, 40) │          0 │ conv2d_6[0][0]    │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ dropout_8 (Dropout) │ (None, 1, 25, 40) │          0 │ conv2d_8[0][0]    │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ dropout_10          │ (None, 1, 9, 40)  │          0 │ conv2d_10[0][0]   │
+│ (Dropout)           │                   │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_1 (Conv2D)   │ (None, 1, 502,    │      1,610 │ dropout[0][0]     │
+│                     │ 10)               │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_3 (Conv2D)   │ (None, 1, 246,    │      1,610 │ dropout_2[0][0]   │
+│                     │ 10)               │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_5 (Conv2D)   │ (None, 1, 118,    │      1,610 │ dropout_4[0][0]   │
+│                     │ 10)               │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_7 (Conv2D)   │ (None, 1, 54, 10) │      1,610 │ dropout_6[0][0]   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_9 (Conv2D)   │ (None, 1, 22, 10) │      1,610 │ dropout_8[0][0]   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ conv2d_11 (Conv2D)  │ (None, 1, 6, 10)  │      1,610 │ dropout_10[0][0]  │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ dropout_1 (Dropout) │ (None, 1, 502,    │          0 │ conv2d_1[0][0]    │
+│                     │ 10)               │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ dropout_3 (Dropout) │ (None, 1, 246,    │          0 │ conv2d_3[0][0]    │
+│                     │ 10)               │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ dropout_5 (Dropout) │ (None, 1, 118,    │          0 │ conv2d_5[0][0]    │
+│                     │ 10)               │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ dropout_7 (Dropout) │ (None, 1, 54, 10) │          0 │ conv2d_7[0][0]    │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ dropout_9 (Dropout) │ (None, 1, 22, 10) │          0 │ conv2d_9[0][0]    │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ dropout_11          │ (None, 1, 6, 10)  │          0 │ conv2d_11[0][0]   │
+│ (Dropout)           │                   │            │                   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ flatten (Flatten)   │ (None, 5020)      │          0 │ dropout_1[0][0]   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ flatten_1 (Flatten) │ (None, 2460)      │          0 │ dropout_3[0][0]   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ flatten_2 (Flatten) │ (None, 1180)      │          0 │ dropout_5[0][0]   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ flatten_3 (Flatten) │ (None, 540)       │          0 │ dropout_7[0][0]   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ flatten_4 (Flatten) │ (None, 220)       │          0 │ dropout_9[0][0]   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ flatten_5 (Flatten) │ (None, 60)        │          0 │ dropout_11[0][0]  │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ concatenate         │ (None, 9480)      │          0 │ flatten[0][0],    │
+│ (Concatenate)       │                   │            │ flatten_1[0][0],  │
+│                     │                   │            │ flatten_2[0][0],  │
+│                     │                   │            │ flatten_3[0][0],  │
+│                     │                   │            │ flatten_4[0][0],  │
+│                     │                   │            │ flatten_5[0][0]   │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ dense1 (Dense)      │ (None, 256)       │  2,427,136 │ concatenate[0][0] │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ dense2 (Dense)      │ (None, 8)         │      2,056 │ dense1[0][0]      │
+├─────────────────────┼───────────────────┼────────────┼───────────────────┤
+│ reshape (Reshape)   │ (None, 8)         │          0 │ dense2[0][0]      │
+└─────────────────────┴───────────────────┴────────────┴───────────────────┘
+ Total params: 2,442,932 (9.32 MB)
+ Trainable params: 2,442,932 (9.32 MB)
+ Non-trainable params: 0 (0.00 B)
+end of architecture
+ 
+Training start
+Epoch 1/100
+/home/umons/eletel/agros/.local/lib/python3.11/site-packages/keras/src/trainers/data_adapters/py_dataset_adapter.py:122: UserWarning: Your `PyDataset` class should call `super().__init__(**kwargs)` in its constructor. `**kwargs` can include `workers`, `use_multiprocessing`, `max_queue_size`. Do not pass these arguments to `fit()`, as they will be ignored.
+  self._warn_if_super_not_called()
+
+Epoch 1: val_loss improved from inf to 1.30126, saving model to ./weights_folder/fusion_512_higher_2.keras
+2450/2450 - 806s - 329ms/step - accuracy: 0.3508 - loss: 1.5990 - val_accuracy: 0.4615 - val_loss: 1.3013
+Epoch 2/100
+2024-11-13 11:59:07.484680: I tensorflow/core/framework/local_rendezvous.cc:404] Local rendezvous is aborting with status: OUT_OF_RANGE: End of sequence
+	 [[{{node IteratorGetNext}}]]
+/opt/sw/arch/easybuild/2023a/softwares/Python/3.11.3-GCCcore-12.3.0/lib/python3.11/contextlib.py:155: UserWarning: Your input ran out of data; interrupting training. Make sure that your dataset or generator can generate at least `steps_per_epoch * epochs` batches. You may need to use the `.repeat()` function when building your dataset.
+  self.gen.throw(typ, value, traceback)
+
+Epoch 2: val_loss improved from 1.30126 to 1.30126, saving model to ./weights_folder/fusion_512_higher_2.keras
+2450/2450 - 14s - 6ms/step - accuracy: 0.0000e+00 - loss: 0.0000e+00 - val_accuracy: 0.4615 - val_loss: 1.3013
+Epoch 3/100
+
+Epoch 3: val_loss improved from 1.30126 to 1.05121, saving model to ./weights_folder/fusion_512_higher_2.keras
+2450/2450 - 230s - 94ms/step - accuracy: 0.4906 - loss: 1.2272 - val_accuracy: 0.5379 - val_loss: 1.0512
+Epoch 4/100
+2024-11-13 12:03:11.566128: I tensorflow/core/framework/local_rendezvous.cc:404] Local rendezvous is aborting with status: OUT_OF_RANGE: End of sequence
+	 [[{{node IteratorGetNext}}]]
+
+Epoch 4: val_loss improved from 1.05121 to 1.05121, saving model to ./weights_folder/fusion_512_higher_2.keras
+2450/2450 - 15s - 6ms/step - accuracy: 0.0000e+00 - loss: 0.0000e+00 - val_accuracy: 0.5379 - val_loss: 1.0512
+Epoch 5/100
+
+Epoch 5: val_loss improved from 1.05121 to 0.98404, saving model to ./weights_folder/fusion_512_higher_2.keras
+2450/2450 - 228s - 93ms/step - accuracy: 0.5475 - loss: 1.0701 - val_accuracy: 0.5738 - val_loss: 0.9840
+Epoch 6/100
+
+Epoch 6: val_loss did not improve from 0.98404
+2450/2450 - 13s - 5ms/step - accuracy: 0.0000e+00 - loss: 0.0000e+00 - val_accuracy: 0.5738 - val_loss: 0.9840
+Epoch 7/100
+slurmstepd: error: *** JOB 112948 ON drg2-w004 CANCELLED AT 2024-11-13T12:11:01 DUE TO TIME LIMIT ***
