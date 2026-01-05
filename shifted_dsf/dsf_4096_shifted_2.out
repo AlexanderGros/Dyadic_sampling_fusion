@@ -1,0 +1,254 @@
+  1) releases/2021b
+job start at Fri Jun  7 23:09:54 CEST 2024
+2024-06-07 23:09:58.725503: I tensorflow/compiler/jit/xla_cpu_device.cc:41] Not creating XLA devices, tf_xla_enable_xla_devices not set
+2024-06-07 23:09:58.726453: I tensorflow/core/common_runtime/process_util.cc:146] Creating new thread pool with default inter op setting: 2. Tune using inter_op_parallelism_threads for best performance.
+2024-06-07 23:09:59.898202: I tensorflow/compiler/mlir/mlir_graph_optimization_pass.cc:116] None of the MLIR optimization passes are enabled (registered 2)
+2024-06-07 23:09:59.898647: I tensorflow/core/platform/profile_utils/cpu_utils.cc:112] CPU Frequency: 2600000000 Hz
+ 
+first y shape:  (112000, 8)
+datagenerator definition successfull
+start AI architecture definition
+Model: "model"
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
+input1 (InputLayer)             [(None, 2, 4096, 1)] 0                                            
+__________________________________________________________________________________________________
+input2 (InputLayer)             [(None, 2, 2048, 1)] 0                                            
+__________________________________________________________________________________________________
+input3 (InputLayer)             [(None, 2, 1024, 1)] 0                                            
+__________________________________________________________________________________________________
+input4 (InputLayer)             [(None, 2, 512, 1)]  0                                            
+__________________________________________________________________________________________________
+input5 (InputLayer)             [(None, 2, 256, 1)]  0                                            
+__________________________________________________________________________________________________
+input6 (InputLayer)             [(None, 2, 128, 1)]  0                                            
+__________________________________________________________________________________________________
+conv2d (Conv2D)                 (None, 1, 4089, 40)  680         input1[0][0]                     
+__________________________________________________________________________________________________
+conv2d_2 (Conv2D)               (None, 1, 2041, 40)  680         input2[0][0]                     
+__________________________________________________________________________________________________
+conv2d_4 (Conv2D)               (None, 1, 1017, 40)  680         input3[0][0]                     
+__________________________________________________________________________________________________
+conv2d_6 (Conv2D)               (None, 1, 505, 40)   680         input4[0][0]                     
+__________________________________________________________________________________________________
+conv2d_8 (Conv2D)               (None, 1, 249, 40)   680         input5[0][0]                     
+__________________________________________________________________________________________________
+conv2d_10 (Conv2D)              (None, 1, 121, 30)   510         input6[0][0]                     
+__________________________________________________________________________________________________
+dropout (Dropout)               (None, 1, 4089, 40)  0           conv2d[0][0]                     
+__________________________________________________________________________________________________
+dropout_2 (Dropout)             (None, 1, 2041, 40)  0           conv2d_2[0][0]                   
+__________________________________________________________________________________________________
+dropout_4 (Dropout)             (None, 1, 1017, 40)  0           conv2d_4[0][0]                   
+__________________________________________________________________________________________________
+dropout_6 (Dropout)             (None, 1, 505, 40)   0           conv2d_6[0][0]                   
+__________________________________________________________________________________________________
+dropout_8 (Dropout)             (None, 1, 249, 40)   0           conv2d_8[0][0]                   
+__________________________________________________________________________________________________
+dropout_10 (Dropout)            (None, 1, 121, 30)   0           conv2d_10[0][0]                  
+__________________________________________________________________________________________________
+conv2d_1 (Conv2D)               (None, 1, 4086, 10)  1610        dropout[0][0]                    
+__________________________________________________________________________________________________
+conv2d_3 (Conv2D)               (None, 1, 2038, 10)  1610        dropout_2[0][0]                  
+__________________________________________________________________________________________________
+conv2d_5 (Conv2D)               (None, 1, 1014, 10)  1610        dropout_4[0][0]                  
+__________________________________________________________________________________________________
+conv2d_7 (Conv2D)               (None, 1, 502, 10)   1610        dropout_6[0][0]                  
+__________________________________________________________________________________________________
+conv2d_9 (Conv2D)               (None, 1, 246, 40)   6440        dropout_8[0][0]                  
+__________________________________________________________________________________________________
+conv2d_11 (Conv2D)              (None, 1, 118, 10)   1210        dropout_10[0][0]                 
+__________________________________________________________________________________________________
+dropout_1 (Dropout)             (None, 1, 4086, 10)  0           conv2d_1[0][0]                   
+__________________________________________________________________________________________________
+dropout_3 (Dropout)             (None, 1, 2038, 10)  0           conv2d_3[0][0]                   
+__________________________________________________________________________________________________
+dropout_5 (Dropout)             (None, 1, 1014, 10)  0           conv2d_5[0][0]                   
+__________________________________________________________________________________________________
+dropout_7 (Dropout)             (None, 1, 502, 10)   0           conv2d_7[0][0]                   
+__________________________________________________________________________________________________
+dropout_9 (Dropout)             (None, 1, 246, 40)   0           conv2d_9[0][0]                   
+__________________________________________________________________________________________________
+dropout_11 (Dropout)            (None, 1, 118, 10)   0           conv2d_11[0][0]                  
+__________________________________________________________________________________________________
+flatten (Flatten)               (None, 40860)        0           dropout_1[0][0]                  
+__________________________________________________________________________________________________
+flatten_1 (Flatten)             (None, 20380)        0           dropout_3[0][0]                  
+__________________________________________________________________________________________________
+flatten_2 (Flatten)             (None, 10140)        0           dropout_5[0][0]                  
+__________________________________________________________________________________________________
+flatten_3 (Flatten)             (None, 5020)         0           dropout_7[0][0]                  
+__________________________________________________________________________________________________
+flatten_4 (Flatten)             (None, 9840)         0           dropout_9[0][0]                  
+__________________________________________________________________________________________________
+flatten_5 (Flatten)             (None, 1180)         0           dropout_11[0][0]                 
+__________________________________________________________________________________________________
+concatenate (Concatenate)       (None, 87420)        0           flatten[0][0]                    
+                                                                 flatten_1[0][0]                  
+                                                                 flatten_2[0][0]                  
+                                                                 flatten_3[0][0]                  
+                                                                 flatten_4[0][0]                  
+                                                                 flatten_5[0][0]                  
+__________________________________________________________________________________________________
+dense1 (Dense)                  (None, 256)          22379776    concatenate[0][0]                
+__________________________________________________________________________________________________
+dense2 (Dense)                  (None, 8)            2056        dense1[0][0]                     
+__________________________________________________________________________________________________
+reshape (Reshape)               (None, 8)            0           dense2[0][0]                     
+==================================================================================================
+Total params: 22,399,832
+Trainable params: 22,399,832
+Non-trainable params: 0
+__________________________________________________________________________________________________
+end of architecture
+ 
+Training start
+Epoch 1/100
+2450/2450 - 1482s - loss: 1.7053 - accuracy: 0.3148 - categorical_accuracy: 0.3148 - val_loss: 1.1844 - val_accuracy: 0.5225 - val_categorical_accuracy: 0.5225
+2024-06-07 23:34:43.560661: W tensorflow/python/util/util.cc:348] Sets are not currently considered sequences, but this may change in the future, so consider avoiding using them.
+
+Epoch 00001: val_loss improved from inf to 1.18436, saving model to ./weights_folder/fusion_shifted_4096_2
+Epoch 2/100
+2450/2450 - 1476s - loss: 0.9610 - accuracy: 0.5897 - categorical_accuracy: 0.5897 - val_loss: 1.1028 - val_accuracy: 0.5560 - val_categorical_accuracy: 0.5560
+
+Epoch 00002: val_loss improved from 1.18436 to 1.10276, saving model to ./weights_folder/fusion_shifted_4096_2
+Epoch 3/100
+2450/2450 - 1475s - loss: 0.7300 - accuracy: 0.6972 - categorical_accuracy: 0.6972 - val_loss: 0.6570 - val_accuracy: 0.7348 - val_categorical_accuracy: 0.7348
+
+Epoch 00003: val_loss improved from 1.10276 to 0.65705, saving model to ./weights_folder/fusion_shifted_4096_2
+Epoch 4/100
+2450/2450 - 1462s - loss: 0.5567 - accuracy: 0.7814 - categorical_accuracy: 0.7814 - val_loss: 0.9213 - val_accuracy: 0.6946 - val_categorical_accuracy: 0.6946
+
+Epoch 00004: val_loss did not improve from 0.65705
+Epoch 5/100
+2450/2450 - 1468s - loss: 0.4336 - accuracy: 0.8391 - categorical_accuracy: 0.8391 - val_loss: 0.4982 - val_accuracy: 0.8093 - val_categorical_accuracy: 0.8093
+
+Epoch 00005: val_loss improved from 0.65705 to 0.49815, saving model to ./weights_folder/fusion_shifted_4096_2
+Epoch 6/100
+2450/2450 - 1466s - loss: 0.3464 - accuracy: 0.8746 - categorical_accuracy: 0.8746 - val_loss: 0.4541 - val_accuracy: 0.8310 - val_categorical_accuracy: 0.8310
+
+Epoch 00006: val_loss improved from 0.49815 to 0.45407, saving model to ./weights_folder/fusion_shifted_4096_2
+Epoch 7/100
+2450/2450 - 1466s - loss: 0.2779 - accuracy: 0.9020 - categorical_accuracy: 0.9020 - val_loss: 0.5307 - val_accuracy: 0.8156 - val_categorical_accuracy: 0.8156
+
+Epoch 00007: val_loss did not improve from 0.45407
+Epoch 8/100
+2450/2450 - 1467s - loss: 0.2356 - accuracy: 0.9183 - categorical_accuracy: 0.9183 - val_loss: 0.3673 - val_accuracy: 0.8636 - val_categorical_accuracy: 0.8636
+
+Epoch 00008: val_loss improved from 0.45407 to 0.36734, saving model to ./weights_folder/fusion_shifted_4096_2
+Epoch 9/100
+2450/2450 - 1466s - loss: 0.2048 - accuracy: 0.9307 - categorical_accuracy: 0.9307 - val_loss: 0.4066 - val_accuracy: 0.8584 - val_categorical_accuracy: 0.8584
+
+Epoch 00009: val_loss did not improve from 0.36734
+Epoch 10/100
+2450/2450 - 1465s - loss: 0.1807 - accuracy: 0.9408 - categorical_accuracy: 0.9408 - val_loss: 0.3143 - val_accuracy: 0.8873 - val_categorical_accuracy: 0.8873
+
+Epoch 00010: val_loss improved from 0.36734 to 0.31433, saving model to ./weights_folder/fusion_shifted_4096_2
+Epoch 11/100
+2450/2450 - 1465s - loss: 0.1557 - accuracy: 0.9497 - categorical_accuracy: 0.9497 - val_loss: 0.3261 - val_accuracy: 0.8835 - val_categorical_accuracy: 0.8835
+
+Epoch 00011: val_loss did not improve from 0.31433
+Epoch 12/100
+2450/2450 - 1465s - loss: 0.1453 - accuracy: 0.9536 - categorical_accuracy: 0.9536 - val_loss: 0.2765 - val_accuracy: 0.9033 - val_categorical_accuracy: 0.9033
+
+Epoch 00012: val_loss improved from 0.31433 to 0.27654, saving model to ./weights_folder/fusion_shifted_4096_2
+Epoch 13/100
+2450/2450 - 1469s - loss: 0.1350 - accuracy: 0.9578 - categorical_accuracy: 0.9578 - val_loss: 0.2629 - val_accuracy: 0.9073 - val_categorical_accuracy: 0.9073
+
+Epoch 00013: val_loss improved from 0.27654 to 0.26295, saving model to ./weights_folder/fusion_shifted_4096_2
+Epoch 14/100
+2450/2450 - 1464s - loss: 0.1200 - accuracy: 0.9626 - categorical_accuracy: 0.9626 - val_loss: 0.2769 - val_accuracy: 0.9015 - val_categorical_accuracy: 0.9015
+
+Epoch 00014: val_loss did not improve from 0.26295
+Epoch 15/100
+2450/2450 - 1465s - loss: 0.1184 - accuracy: 0.9632 - categorical_accuracy: 0.9632 - val_loss: 0.2493 - val_accuracy: 0.9158 - val_categorical_accuracy: 0.9158
+
+Epoch 00015: val_loss improved from 0.26295 to 0.24935, saving model to ./weights_folder/fusion_shifted_4096_2
+Epoch 16/100
+2450/2450 - 1469s - loss: 0.1085 - accuracy: 0.9668 - categorical_accuracy: 0.9668 - val_loss: 0.2514 - val_accuracy: 0.9106 - val_categorical_accuracy: 0.9106
+
+Epoch 00016: val_loss did not improve from 0.24935
+Epoch 17/100
+2450/2450 - 1466s - loss: 0.1054 - accuracy: 0.9687 - categorical_accuracy: 0.9687 - val_loss: 0.2247 - val_accuracy: 0.9232 - val_categorical_accuracy: 0.9232
+
+Epoch 00017: val_loss improved from 0.24935 to 0.22467, saving model to ./weights_folder/fusion_shifted_4096_2
+Epoch 18/100
+2450/2450 - 1468s - loss: 0.0976 - accuracy: 0.9708 - categorical_accuracy: 0.9708 - val_loss: 0.2296 - val_accuracy: 0.9229 - val_categorical_accuracy: 0.9229
+
+Epoch 00018: val_loss did not improve from 0.22467
+Epoch 19/100
+2450/2450 - 1467s - loss: 0.0961 - accuracy: 0.9731 - categorical_accuracy: 0.9731 - val_loss: 0.2532 - val_accuracy: 0.9163 - val_categorical_accuracy: 0.9163
+
+Epoch 00019: val_loss did not improve from 0.22467
+Epoch 20/100
+2450/2450 - 1468s - loss: 0.0895 - accuracy: 0.9741 - categorical_accuracy: 0.9741 - val_loss: 0.2895 - val_accuracy: 0.9029 - val_categorical_accuracy: 0.9029
+
+Epoch 00020: val_loss did not improve from 0.22467
+Epoch 21/100
+2450/2450 - 1468s - loss: 0.0906 - accuracy: 0.9744 - categorical_accuracy: 0.9744 - val_loss: 0.2198 - val_accuracy: 0.9244 - val_categorical_accuracy: 0.9244
+
+Epoch 00021: val_loss improved from 0.22467 to 0.21980, saving model to ./weights_folder/fusion_shifted_4096_2
+Epoch 22/100
+2450/2450 - 1466s - loss: 0.0868 - accuracy: 0.9753 - categorical_accuracy: 0.9753 - val_loss: 0.2327 - val_accuracy: 0.9259 - val_categorical_accuracy: 0.9259
+
+Epoch 00022: val_loss did not improve from 0.21980
+Epoch 23/100
+2450/2450 - 1468s - loss: 0.0853 - accuracy: 0.9758 - categorical_accuracy: 0.9758 - val_loss: 0.2832 - val_accuracy: 0.9085 - val_categorical_accuracy: 0.9085
+
+Epoch 00023: val_loss did not improve from 0.21980
+Epoch 24/100
+2450/2450 - 1469s - loss: 0.0858 - accuracy: 0.9768 - categorical_accuracy: 0.9768 - val_loss: 0.2207 - val_accuracy: 0.9296 - val_categorical_accuracy: 0.9296
+
+Epoch 00024: val_loss did not improve from 0.21980
+Epoch 25/100
+2450/2450 - 1468s - loss: 0.0759 - accuracy: 0.9793 - categorical_accuracy: 0.9793 - val_loss: 0.2107 - val_accuracy: 0.9300 - val_categorical_accuracy: 0.9300
+
+Epoch 00025: val_loss improved from 0.21980 to 0.21074, saving model to ./weights_folder/fusion_shifted_4096_2
+Epoch 26/100
+2450/2450 - 1467s - loss: 0.0759 - accuracy: 0.9787 - categorical_accuracy: 0.9787 - val_loss: 0.2779 - val_accuracy: 0.9103 - val_categorical_accuracy: 0.9103
+
+Epoch 00026: val_loss did not improve from 0.21074
+Epoch 27/100
+2450/2450 - 1467s - loss: 0.0691 - accuracy: 0.9810 - categorical_accuracy: 0.9810 - val_loss: 0.4092 - val_accuracy: 0.8806 - val_categorical_accuracy: 0.8806
+
+Epoch 00027: val_loss did not improve from 0.21074
+Epoch 28/100
+2450/2450 - 1470s - loss: 0.0713 - accuracy: 0.9801 - categorical_accuracy: 0.9801 - val_loss: 0.2162 - val_accuracy: 0.9282 - val_categorical_accuracy: 0.9282
+
+Epoch 00028: val_loss did not improve from 0.21074
+Epoch 29/100
+2450/2450 - 1465s - loss: 0.0714 - accuracy: 0.9805 - categorical_accuracy: 0.9805 - val_loss: 0.2386 - val_accuracy: 0.9242 - val_categorical_accuracy: 0.9242
+
+Epoch 00029: val_loss did not improve from 0.21074
+Epoch 30/100
+2450/2450 - 1470s - loss: 0.0693 - accuracy: 0.9810 - categorical_accuracy: 0.9810 - val_loss: 0.2785 - val_accuracy: 0.9124 - val_categorical_accuracy: 0.9124
+
+Epoch 00030: val_loss did not improve from 0.21074
+Epoch 31/100
+2450/2450 - 1463s - loss: 0.0688 - accuracy: 0.9816 - categorical_accuracy: 0.9816 - val_loss: 0.2152 - val_accuracy: 0.9306 - val_categorical_accuracy: 0.9306
+
+Epoch 00031: val_loss did not improve from 0.21074
+Epoch 32/100
+2450/2450 - 1469s - loss: 0.0650 - accuracy: 0.9826 - categorical_accuracy: 0.9826 - val_loss: 0.2089 - val_accuracy: 0.9345 - val_categorical_accuracy: 0.9345
+
+Epoch 00032: val_loss improved from 0.21074 to 0.20887, saving model to ./weights_folder/fusion_shifted_4096_2
+Epoch 33/100
+2450/2450 - 1465s - loss: 0.0648 - accuracy: 0.9826 - categorical_accuracy: 0.9826 - val_loss: 0.3131 - val_accuracy: 0.9058 - val_categorical_accuracy: 0.9058
+
+Epoch 00033: val_loss did not improve from 0.20887
+Epoch 34/100
+2450/2450 - 1462s - loss: 0.0608 - accuracy: 0.9838 - categorical_accuracy: 0.9838 - val_loss: 0.2393 - val_accuracy: 0.9279 - val_categorical_accuracy: 0.9279
+
+Epoch 00034: val_loss did not improve from 0.20887
+Epoch 35/100
+2450/2450 - 1445s - loss: 0.0626 - accuracy: 0.9837 - categorical_accuracy: 0.9837 - val_loss: 0.2234 - val_accuracy: 0.9298 - val_categorical_accuracy: 0.9298
+
+Epoch 00035: val_loss did not improve from 0.20887
+Epoch 36/100
+2450/2450 - 1446s - loss: 0.0616 - accuracy: 0.9839 - categorical_accuracy: 0.9839 - val_loss: 0.1881 - val_accuracy: 0.9419 - val_categorical_accuracy: 0.9419
+
+Epoch 00036: val_loss improved from 0.20887 to 0.18809, saving model to ./weights_folder/fusion_shifted_4096_2
+Epoch 37/100
+2450/2450 - 1454s - loss: 0.0621 - accuracy: 0.9836 - categorical_accuracy: 0.9836 - val_loss: 0.2168 - val_accuracy: 0.9286 - val_categorical_accuracy: 0.9286
+slurmstepd: error: *** JOB 1369452 ON drg2-w015 CANCELLED AT 2024-06-08T14:25:08 DUE TO TIME LIMIT ***
