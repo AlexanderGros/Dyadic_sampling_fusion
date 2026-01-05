@@ -2,6 +2,12 @@ This repository investigates the possibility to improve Automatic Modulation Cla
 
 For additional information see the Poster : Poster_MdC_AG.pdf
 
+The paper for citation can be found here: https://ieeexplore.ieee.org/document/11193926
+
+The trained weights are too big for github, please contact me if you need them or want to collaborate.
+
+The folders are not very well structured for the moment (lack of time), if you have any questions please ask.
+
 The initial code can be found under: dyadic_s_fusion.py
 
 The used Dataset is the Machine-Learning Challenge [CSPB.ML.2018] of Chad Spooners cyclostationary.blog.
