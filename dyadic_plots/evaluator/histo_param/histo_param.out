@@ -1,0 +1,9 @@
+job start at Wed Feb 12 11:38:15 CET 2025
+ 
+first y shape:  (112000, 8)
+mean: -5.961861947041561e-07
+Standard Deviation: 0.0005684288013587274
+Minimum: -0.00099955356456
+Maximum: 0.0009993240157
+['id', 'modulation', 'base_symbol_period', 'carrier_offset', 'excess_bw', 'upsample_factor', 'downsample_factor', 'snr', 'noise_spectral_density']
+job end at Wed Feb 12 11:38:53 CET 2025

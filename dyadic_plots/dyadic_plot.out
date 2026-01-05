@@ -1,0 +1,30 @@
+Lmod has detected the following error: The following module(s) are unknown:
+"Keras/2.4.3-foss-2020b"
+
+Please check the spelling or version number. Also try "module spider ..."
+It is also possible your cache file is out-of-date; it may help to try:
+  $ module --ignore_cache load "Keras/2.4.3-foss-2020b"
+
+Also make sure that all modulefiles written in TCL start with the string
+#%Module
+
+
+
+Lmod has detected the following error: The following module(s) are unknown:
+"h5py/3.1.0-foss-2020b"
+
+Please check the spelling or version number. Also try "module spider ..."
+It is also possible your cache file is out-of-date; it may help to try:
+  $ module --ignore_cache load "h5py/3.1.0-foss-2020b"
+
+Also make sure that all modulefiles written in TCL start with the string
+#%Module
+
+
+
+job start at Sun Dec 15 17:54:52 CET 2024
+Traceback (most recent call last):
+  File "dyadic_plot.py", line 26, in <module>
+    import keras  #for keras.sequence.utils
+ModuleNotFoundError: No module named 'keras'
+job end at Sun Dec 15 17:55:07 CET 2024

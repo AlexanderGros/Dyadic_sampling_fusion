@@ -1,0 +1,281 @@
+job start at Wed May 14 10:48:30 CEST 2025
+2025-05-14 10:48:40.468368: I external/local_xla/xla/tsl/cuda/cudart_stub.cc:32] Could not find cuda drivers on your machine, GPU will not be used.
+2025-05-14 10:48:41.702922: I external/local_xla/xla/tsl/cuda/cudart_stub.cc:32] Could not find cuda drivers on your machine, GPU will not be used.
+2025-05-14 10:48:42.828681: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:485] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+2025-05-14 10:48:42.891010: E external/local_xla/xla/stream_executor/cuda/cuda_dnn.cc:8454] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+2025-05-14 10:48:42.909113: E external/local_xla/xla/stream_executor/cuda/cuda_blas.cc:1452] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+2025-05-14 10:48:43.019055: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2025-05-14 10:49:02.042424: W tensorflow/compiler/tf2tensorrt/utils/py_utils.cc:38] TF-TRT Warning: Could not find TensorRT
+ 
+first y shape:  (112000, 8)
+datagenerator definition successfull
+start AI architecture definition
+Model: "functional"
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━┓
+┃ Layer (type)                    ┃ Output Shape           ┃       Param # ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━┩
+│ input1 (InputLayer)             │ (None, 2, 4096, 1)     │             0 │
+├─────────────────────────────────┼────────────────────────┼───────────────┤
+│ conv2d (Conv2D)                 │ (None, 1, 4089, 40)    │           680 │
+├─────────────────────────────────┼────────────────────────┼───────────────┤
+│ dropout (Dropout)               │ (None, 1, 4089, 40)    │             0 │
+├─────────────────────────────────┼────────────────────────┼───────────────┤
+│ conv2d_1 (Conv2D)               │ (None, 1, 4086, 10)    │         1,610 │
+├─────────────────────────────────┼────────────────────────┼───────────────┤
+│ dropout_1 (Dropout)             │ (None, 1, 4086, 10)    │             0 │
+├─────────────────────────────────┼────────────────────────┼───────────────┤
+│ flatten (Flatten)               │ (None, 40860)          │             0 │
+├─────────────────────────────────┼────────────────────────┼───────────────┤
+│ dense1 (Dense)                  │ (None, 128)            │     5,230,208 │
+├─────────────────────────────────┼────────────────────────┼───────────────┤
+│ dense2 (Dense)                  │ (None, 8)              │         1,032 │
+├─────────────────────────────────┼────────────────────────┼───────────────┤
+│ reshape (Reshape)               │ (None, 8)              │             0 │
+└─────────────────────────────────┴────────────────────────┴───────────────┘
+ Total params: 5,233,530 (19.96 MB)
+ Trainable params: 5,233,530 (19.96 MB)
+ Non-trainable params: 0 (0.00 B)
+end of architecture
+ 
+Training start
+Epoch 1/100
+
+Epoch 1: val_loss improved from inf to 1.26083, saving model to ./weights_folder/iq_eval_4096_norm.keras
+2450/2450 - 649s - 265ms/step - categorical_accuracy: 0.3458 - loss: 1.5780 - val_categorical_accuracy: 0.4550 - val_loss: 1.2608
+Epoch 2/100
+
+Epoch 2: val_loss improved from 1.26083 to 0.97170, saving model to ./weights_folder/iq_eval_4096_norm.keras
+2450/2450 - 620s - 253ms/step - categorical_accuracy: 0.5640 - loss: 1.0197 - val_categorical_accuracy: 0.5798 - val_loss: 0.9717
+Epoch 3/100
+
+Epoch 3: val_loss improved from 0.97170 to 0.86411, saving model to ./weights_folder/iq_eval_4096_norm.keras
+2450/2450 - 619s - 253ms/step - categorical_accuracy: 0.6298 - loss: 0.8789 - val_categorical_accuracy: 0.6317 - val_loss: 0.8641
+Epoch 4/100
+
+Epoch 4: val_loss improved from 0.86411 to 0.80670, saving model to ./weights_folder/iq_eval_4096_norm.keras
+2450/2450 - 619s - 253ms/step - categorical_accuracy: 0.6762 - loss: 0.7874 - val_categorical_accuracy: 0.6635 - val_loss: 0.8067
+Epoch 5/100
+
+Epoch 5: val_loss improved from 0.80670 to 0.77593, saving model to ./weights_folder/iq_eval_4096_norm.keras
+2450/2450 - 619s - 253ms/step - categorical_accuracy: 0.7108 - loss: 0.7128 - val_categorical_accuracy: 0.6769 - val_loss: 0.7759
+Epoch 6/100
+
+Epoch 6: val_loss improved from 0.77593 to 0.71616, saving model to ./weights_folder/iq_eval_4096_norm.keras
+2450/2450 - 619s - 253ms/step - categorical_accuracy: 0.7358 - loss: 0.6560 - val_categorical_accuracy: 0.7026 - val_loss: 0.7162
+Epoch 7/100
+
+Epoch 7: val_loss did not improve from 0.71616
+2450/2450 - 618s - 252ms/step - categorical_accuracy: 0.7587 - loss: 0.6058 - val_categorical_accuracy: 0.6565 - val_loss: 0.9114
+Epoch 8/100
+
+Epoch 8: val_loss improved from 0.71616 to 0.67358, saving model to ./weights_folder/iq_eval_4096_norm.keras
+2450/2450 - 620s - 253ms/step - categorical_accuracy: 0.7767 - loss: 0.5637 - val_categorical_accuracy: 0.7258 - val_loss: 0.6736
+Epoch 9/100
+
+Epoch 9: val_loss did not improve from 0.67358
+2450/2450 - 620s - 253ms/step - categorical_accuracy: 0.7913 - loss: 0.5298 - val_categorical_accuracy: 0.6743 - val_loss: 0.8731
+Epoch 10/100
+
+Epoch 10: val_loss improved from 0.67358 to 0.65664, saving model to ./weights_folder/iq_eval_4096_norm.keras
+2450/2450 - 620s - 253ms/step - categorical_accuracy: 0.8057 - loss: 0.4966 - val_categorical_accuracy: 0.7380 - val_loss: 0.6566
+Epoch 11/100
+
+Epoch 11: val_loss improved from 0.65664 to 0.64785, saving model to ./weights_folder/iq_eval_4096_norm.keras
+2450/2450 - 620s - 253ms/step - categorical_accuracy: 0.8185 - loss: 0.4704 - val_categorical_accuracy: 0.7457 - val_loss: 0.6478
+Epoch 12/100
+
+Epoch 12: val_loss improved from 0.64785 to 0.63228, saving model to ./weights_folder/iq_eval_4096_norm.keras
+2450/2450 - 619s - 253ms/step - categorical_accuracy: 0.8274 - loss: 0.4483 - val_categorical_accuracy: 0.7493 - val_loss: 0.6323
+Epoch 13/100
+
+Epoch 13: val_loss improved from 0.63228 to 0.61272, saving model to ./weights_folder/iq_eval_4096_norm.keras
+2450/2450 - 619s - 253ms/step - categorical_accuracy: 0.8348 - loss: 0.4309 - val_categorical_accuracy: 0.7576 - val_loss: 0.6127
+Epoch 14/100
+
+Epoch 14: val_loss improved from 0.61272 to 0.60428, saving model to ./weights_folder/iq_eval_4096_norm.keras
+2450/2450 - 620s - 253ms/step - categorical_accuracy: 0.8447 - loss: 0.4096 - val_categorical_accuracy: 0.7655 - val_loss: 0.6043
+Epoch 15/100
+
+Epoch 15: val_loss improved from 0.60428 to 0.59716, saving model to ./weights_folder/iq_eval_4096_norm.keras
+2450/2450 - 622s - 254ms/step - categorical_accuracy: 0.8519 - loss: 0.3919 - val_categorical_accuracy: 0.7678 - val_loss: 0.5972
+Epoch 16/100
+
+Epoch 16: val_loss did not improve from 0.59716
+2450/2450 - 621s - 253ms/step - categorical_accuracy: 0.8564 - loss: 0.3799 - val_categorical_accuracy: 0.7464 - val_loss: 0.6870
+Epoch 17/100
+
+Epoch 17: val_loss improved from 0.59716 to 0.57892, saving model to ./weights_folder/iq_eval_4096_norm.keras
+2450/2450 - 620s - 253ms/step - categorical_accuracy: 0.8638 - loss: 0.3624 - val_categorical_accuracy: 0.7783 - val_loss: 0.5789
+Epoch 18/100
+
+Epoch 18: val_loss did not improve from 0.57892
+2450/2450 - 619s - 253ms/step - categorical_accuracy: 0.8666 - loss: 0.3530 - val_categorical_accuracy: 0.7682 - val_loss: 0.6034
+Epoch 19/100
+
+Epoch 19: val_loss improved from 0.57892 to 0.55796, saving model to ./weights_folder/iq_eval_4096_norm.keras
+2450/2450 - 620s - 253ms/step - categorical_accuracy: 0.8715 - loss: 0.3458 - val_categorical_accuracy: 0.7858 - val_loss: 0.5580
+Epoch 20/100
+
+Epoch 20: val_loss did not improve from 0.55796
+2450/2450 - 620s - 253ms/step - categorical_accuracy: 0.8791 - loss: 0.3248 - val_categorical_accuracy: 0.7906 - val_loss: 0.5609
+Epoch 21/100
+
+Epoch 21: val_loss did not improve from 0.55796
+2450/2450 - 623s - 254ms/step - categorical_accuracy: 0.8833 - loss: 0.3168 - val_categorical_accuracy: 0.7824 - val_loss: 0.5874
+Epoch 22/100
+
+Epoch 22: val_loss did not improve from 0.55796
+2450/2450 - 622s - 254ms/step - categorical_accuracy: 0.8856 - loss: 0.3074 - val_categorical_accuracy: 0.7857 - val_loss: 0.5744
+Epoch 23/100
+
+Epoch 23: val_loss did not improve from 0.55796
+2450/2450 - 622s - 254ms/step - categorical_accuracy: 0.8886 - loss: 0.3004 - val_categorical_accuracy: 0.7926 - val_loss: 0.5629
+Epoch 24/100
+
+Epoch 24: val_loss did not improve from 0.55796
+2450/2450 - 621s - 253ms/step - categorical_accuracy: 0.8931 - loss: 0.2882 - val_categorical_accuracy: 0.7892 - val_loss: 0.5769
+Epoch 25/100
+
+Epoch 25: val_loss improved from 0.55796 to 0.53805, saving model to ./weights_folder/iq_eval_4096_norm.keras
+2450/2450 - 619s - 253ms/step - categorical_accuracy: 0.8963 - loss: 0.2821 - val_categorical_accuracy: 0.8014 - val_loss: 0.5380
+Epoch 26/100
+
+Epoch 26: val_loss did not improve from 0.53805
+2450/2450 - 622s - 254ms/step - categorical_accuracy: 0.8989 - loss: 0.2742 - val_categorical_accuracy: 0.7794 - val_loss: 0.6313
+Epoch 27/100
+
+Epoch 27: val_loss did not improve from 0.53805
+2450/2450 - 620s - 253ms/step - categorical_accuracy: 0.9024 - loss: 0.2697 - val_categorical_accuracy: 0.8006 - val_loss: 0.5576
+Epoch 28/100
+
+Epoch 28: val_loss did not improve from 0.53805
+2450/2450 - 623s - 254ms/step - categorical_accuracy: 0.9060 - loss: 0.2575 - val_categorical_accuracy: 0.8037 - val_loss: 0.5502
+Epoch 29/100
+
+Epoch 29: val_loss improved from 0.53805 to 0.52952, saving model to ./weights_folder/iq_eval_4096_norm.keras
+2450/2450 - 623s - 254ms/step - categorical_accuracy: 0.9068 - loss: 0.2568 - val_categorical_accuracy: 0.8082 - val_loss: 0.5295
+Epoch 30/100
+
+Epoch 30: val_loss did not improve from 0.52952
+2450/2450 - 621s - 254ms/step - categorical_accuracy: 0.9113 - loss: 0.2441 - val_categorical_accuracy: 0.8107 - val_loss: 0.5346
+Epoch 31/100
+
+Epoch 31: val_loss did not improve from 0.52952
+2450/2450 - 622s - 254ms/step - categorical_accuracy: 0.9111 - loss: 0.2470 - val_categorical_accuracy: 0.8112 - val_loss: 0.5339
+Epoch 32/100
+
+Epoch 32: val_loss did not improve from 0.52952
+2450/2450 - 619s - 253ms/step - categorical_accuracy: 0.9153 - loss: 0.2362 - val_categorical_accuracy: 0.8043 - val_loss: 0.5497
+Epoch 33/100
+
+Epoch 33: val_loss did not improve from 0.52952
+2450/2450 - 620s - 253ms/step - categorical_accuracy: 0.9155 - loss: 0.2358 - val_categorical_accuracy: 0.8075 - val_loss: 0.5518
+Epoch 34/100
+
+Epoch 34: val_loss did not improve from 0.52952
+2450/2450 - 619s - 253ms/step - categorical_accuracy: 0.9191 - loss: 0.2238 - val_categorical_accuracy: 0.8090 - val_loss: 0.5507
+Epoch 35/100
+
+Epoch 35: val_loss improved from 0.52952 to 0.51618, saving model to ./weights_folder/iq_eval_4096_norm.keras
+2450/2450 - 618s - 252ms/step - categorical_accuracy: 0.9215 - loss: 0.2189 - val_categorical_accuracy: 0.8197 - val_loss: 0.5162
+Epoch 36/100
+
+Epoch 36: val_loss did not improve from 0.51618
+2450/2450 - 618s - 252ms/step - categorical_accuracy: 0.9221 - loss: 0.2198 - val_categorical_accuracy: 0.8116 - val_loss: 0.5502
+Epoch 37/100
+
+Epoch 37: val_loss improved from 0.51618 to 0.51294, saving model to ./weights_folder/iq_eval_4096_norm.keras
+2450/2450 - 619s - 253ms/step - categorical_accuracy: 0.9262 - loss: 0.2086 - val_categorical_accuracy: 0.8193 - val_loss: 0.5129
+Epoch 38/100
+
+Epoch 38: val_loss did not improve from 0.51294
+2450/2450 - 620s - 253ms/step - categorical_accuracy: 0.9248 - loss: 0.2080 - val_categorical_accuracy: 0.8183 - val_loss: 0.5293
+Epoch 39/100
+
+Epoch 39: val_loss did not improve from 0.51294
+2450/2450 - 619s - 253ms/step - categorical_accuracy: 0.9261 - loss: 0.2078 - val_categorical_accuracy: 0.8223 - val_loss: 0.5228
+Epoch 40/100
+
+Epoch 40: val_loss did not improve from 0.51294
+2450/2450 - 618s - 252ms/step - categorical_accuracy: 0.9279 - loss: 0.2034 - val_categorical_accuracy: 0.8133 - val_loss: 0.5481
+Epoch 41/100
+
+Epoch 41: val_loss did not improve from 0.51294
+2450/2450 - 619s - 253ms/step - categorical_accuracy: 0.9292 - loss: 0.1993 - val_categorical_accuracy: 0.8146 - val_loss: 0.5420
+Epoch 42/100
+
+Epoch 42: val_loss did not improve from 0.51294
+2450/2450 - 620s - 253ms/step - categorical_accuracy: 0.9297 - loss: 0.1974 - val_categorical_accuracy: 0.8176 - val_loss: 0.5419
+Epoch 43/100
+
+Epoch 43: val_loss did not improve from 0.51294
+2450/2450 - 622s - 254ms/step - categorical_accuracy: 0.9321 - loss: 0.1901 - val_categorical_accuracy: 0.8193 - val_loss: 0.5483
+Epoch 44/100
+
+Epoch 44: val_loss improved from 0.51294 to 0.50767, saving model to ./weights_folder/iq_eval_4096_norm.keras
+2450/2450 - 621s - 254ms/step - categorical_accuracy: 0.9353 - loss: 0.1847 - val_categorical_accuracy: 0.8287 - val_loss: 0.5077
+Epoch 45/100
+
+Epoch 45: val_loss did not improve from 0.50767
+2450/2450 - 622s - 254ms/step - categorical_accuracy: 0.9327 - loss: 0.1881 - val_categorical_accuracy: 0.8271 - val_loss: 0.5227
+Epoch 46/100
+
+Epoch 46: val_loss did not improve from 0.50767
+2450/2450 - 621s - 254ms/step - categorical_accuracy: 0.9370 - loss: 0.1795 - val_categorical_accuracy: 0.8188 - val_loss: 0.5461
+Epoch 47/100
+
+Epoch 47: val_loss improved from 0.50767 to 0.50625, saving model to ./weights_folder/iq_eval_4096_norm.keras
+2450/2450 - 620s - 253ms/step - categorical_accuracy: 0.9357 - loss: 0.1844 - val_categorical_accuracy: 0.8318 - val_loss: 0.5062
+Epoch 48/100
+
+Epoch 48: val_loss did not improve from 0.50625
+2450/2450 - 618s - 252ms/step - categorical_accuracy: 0.9386 - loss: 0.1749 - val_categorical_accuracy: 0.8243 - val_loss: 0.5289
+Epoch 49/100
+
+Epoch 49: val_loss did not improve from 0.50625
+2450/2450 - 616s - 251ms/step - categorical_accuracy: 0.9385 - loss: 0.1774 - val_categorical_accuracy: 0.8247 - val_loss: 0.5193
+Epoch 50/100
+
+Epoch 50: val_loss did not improve from 0.50625
+2450/2450 - 615s - 251ms/step - categorical_accuracy: 0.9390 - loss: 0.1735 - val_categorical_accuracy: 0.8251 - val_loss: 0.5306
+Epoch 51/100
+
+Epoch 51: val_loss did not improve from 0.50625
+2450/2450 - 614s - 251ms/step - categorical_accuracy: 0.9405 - loss: 0.1701 - val_categorical_accuracy: 0.8221 - val_loss: 0.5621
+Epoch 52/100
+
+Epoch 52: val_loss did not improve from 0.50625
+2450/2450 - 614s - 251ms/step - categorical_accuracy: 0.9421 - loss: 0.1687 - val_categorical_accuracy: 0.8212 - val_loss: 0.5564
+Epoch 53/100
+
+Epoch 53: val_loss did not improve from 0.50625
+2450/2450 - 614s - 251ms/step - categorical_accuracy: 0.9398 - loss: 0.1713 - val_categorical_accuracy: 0.8274 - val_loss: 0.5129
+Epoch 54/100
+
+Epoch 54: val_loss did not improve from 0.50625
+2450/2450 - 614s - 251ms/step - categorical_accuracy: 0.9432 - loss: 0.1653 - val_categorical_accuracy: 0.8293 - val_loss: 0.5198
+Epoch 55/100
+
+Epoch 55: val_loss did not improve from 0.50625
+2450/2450 - 614s - 251ms/step - categorical_accuracy: 0.9458 - loss: 0.1589 - val_categorical_accuracy: 0.8223 - val_loss: 0.5540
+Epoch 56/100
+
+Epoch 56: val_loss did not improve from 0.50625
+2450/2450 - 614s - 251ms/step - categorical_accuracy: 0.9438 - loss: 0.1628 - val_categorical_accuracy: 0.8308 - val_loss: 0.5184
+Epoch 57/100
+
+Epoch 57: val_loss did not improve from 0.50625
+2450/2450 - 615s - 251ms/step - categorical_accuracy: 0.9452 - loss: 0.1604 - val_categorical_accuracy: 0.8263 - val_loss: 0.5343
+Epoch 57: early stopping
+training time:  35324.38170194626 seconds 
+end of training
+ 
+Loading model
+end of loading
+ 
+Evaluating model
+end of evaluation
+ 
+score:  [0.5062456727027893, 0.831845223903656]
+job end at Wed May 14 20:38:38 CEST 2025
