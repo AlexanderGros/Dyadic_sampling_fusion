@@ -1,0 +1,115 @@
+  1) releases/2021b
+job start at Fri Jun  7 22:30:25 CEST 2024
+2024-06-07 22:30:42.503688: I tensorflow/compiler/jit/xla_cpu_device.cc:41] Not creating XLA devices, tf_xla_enable_xla_devices not set
+2024-06-07 22:30:42.504688: I tensorflow/core/common_runtime/process_util.cc:146] Creating new thread pool with default inter op setting: 2. Tune using inter_op_parallelism_threads for best performance.
+2024-06-07 22:30:43.031055: I tensorflow/compiler/mlir/mlir_graph_optimization_pass.cc:116] None of the MLIR optimization passes are enabled (registered 2)
+2024-06-07 22:30:43.031535: I tensorflow/core/platform/profile_utils/cpu_utils.cc:112] CPU Frequency: 2600000000 Hz
+ 
+first y shape:  (112000, 8)
+datagenerator definition successfull
+start AI architecture definition
+Model: "model"
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
+input1 (InputLayer)             [(None, 2, 4096, 1)] 0                                            
+__________________________________________________________________________________________________
+input2 (InputLayer)             [(None, 2, 2048, 1)] 0                                            
+__________________________________________________________________________________________________
+input3 (InputLayer)             [(None, 2, 1024, 1)] 0                                            
+__________________________________________________________________________________________________
+conv2d (Conv2D)                 (None, 1, 4089, 40)  680         input1[0][0]                     
+__________________________________________________________________________________________________
+conv2d_2 (Conv2D)               (None, 1, 2041, 40)  680         input2[0][0]                     
+__________________________________________________________________________________________________
+conv2d_4 (Conv2D)               (None, 1, 1017, 40)  680         input3[0][0]                     
+__________________________________________________________________________________________________
+dropout (Dropout)               (None, 1, 4089, 40)  0           conv2d[0][0]                     
+__________________________________________________________________________________________________
+dropout_2 (Dropout)             (None, 1, 2041, 40)  0           conv2d_2[0][0]                   
+__________________________________________________________________________________________________
+dropout_4 (Dropout)             (None, 1, 1017, 40)  0           conv2d_4[0][0]                   
+__________________________________________________________________________________________________
+conv2d_1 (Conv2D)               (None, 1, 4086, 10)  1610        dropout[0][0]                    
+__________________________________________________________________________________________________
+conv2d_3 (Conv2D)               (None, 1, 2038, 10)  1610        dropout_2[0][0]                  
+__________________________________________________________________________________________________
+conv2d_5 (Conv2D)               (None, 1, 1014, 10)  1610        dropout_4[0][0]                  
+__________________________________________________________________________________________________
+dropout_1 (Dropout)             (None, 1, 4086, 10)  0           conv2d_1[0][0]                   
+__________________________________________________________________________________________________
+dropout_3 (Dropout)             (None, 1, 2038, 10)  0           conv2d_3[0][0]                   
+__________________________________________________________________________________________________
+dropout_5 (Dropout)             (None, 1, 1014, 10)  0           conv2d_5[0][0]                   
+__________________________________________________________________________________________________
+flatten (Flatten)               (None, 40860)        0           dropout_1[0][0]                  
+__________________________________________________________________________________________________
+flatten_1 (Flatten)             (None, 20380)        0           dropout_3[0][0]                  
+__________________________________________________________________________________________________
+flatten_2 (Flatten)             (None, 10140)        0           dropout_5[0][0]                  
+__________________________________________________________________________________________________
+concatenate (Concatenate)       (None, 71380)        0           flatten[0][0]                    
+                                                                 flatten_1[0][0]                  
+                                                                 flatten_2[0][0]                  
+__________________________________________________________________________________________________
+dense1 (Dense)                  (None, 128)          9136768     concatenate[0][0]                
+__________________________________________________________________________________________________
+dense2 (Dense)                  (None, 8)            1032        dense1[0][0]                     
+__________________________________________________________________________________________________
+reshape (Reshape)               (None, 8)            0           dense2[0][0]                     
+==================================================================================================
+Total params: 9,144,670
+Trainable params: 9,144,670
+Non-trainable params: 0
+__________________________________________________________________________________________________
+end of architecture
+ 
+Training start
+Epoch 1/100
+Traceback (most recent call last):
+  File "dyadic_one.py", line 308, in <module>
+    history = model.fit(DataGenerator(train_idx, y, 32, vec_len, shuffle=True),  
+  File "/opt/cecisw/arch/easybuild/2020b/software/TensorFlow/2.4.1-foss-2020b/lib/python3.8/site-packages/tensorflow/python/keras/engine/training.py", line 1100, in fit
+    tmp_logs = self.train_function(iterator)
+  File "/opt/cecisw/arch/easybuild/2020b/software/TensorFlow/2.4.1-foss-2020b/lib/python3.8/site-packages/tensorflow/python/eager/def_function.py", line 828, in __call__
+    result = self._call(*args, **kwds)
+  File "/opt/cecisw/arch/easybuild/2020b/software/TensorFlow/2.4.1-foss-2020b/lib/python3.8/site-packages/tensorflow/python/eager/def_function.py", line 871, in _call
+    self._initialize(args, kwds, add_initializers_to=initializers)
+  File "/opt/cecisw/arch/easybuild/2020b/software/TensorFlow/2.4.1-foss-2020b/lib/python3.8/site-packages/tensorflow/python/eager/def_function.py", line 725, in _initialize
+    self._stateful_fn._get_concrete_function_internal_garbage_collected(  # pylint: disable=protected-access
+  File "/opt/cecisw/arch/easybuild/2020b/software/TensorFlow/2.4.1-foss-2020b/lib/python3.8/site-packages/tensorflow/python/eager/function.py", line 2969, in _get_concrete_function_internal_garbage_collected
+    graph_function, _ = self._maybe_define_function(args, kwargs)
+  File "/opt/cecisw/arch/easybuild/2020b/software/TensorFlow/2.4.1-foss-2020b/lib/python3.8/site-packages/tensorflow/python/eager/function.py", line 3361, in _maybe_define_function
+    graph_function = self._create_graph_function(args, kwargs)
+  File "/opt/cecisw/arch/easybuild/2020b/software/TensorFlow/2.4.1-foss-2020b/lib/python3.8/site-packages/tensorflow/python/eager/function.py", line 3196, in _create_graph_function
+    func_graph_module.func_graph_from_py_func(
+  File "/opt/cecisw/arch/easybuild/2020b/software/TensorFlow/2.4.1-foss-2020b/lib/python3.8/site-packages/tensorflow/python/framework/func_graph.py", line 990, in func_graph_from_py_func
+    func_outputs = python_func(*func_args, **func_kwargs)
+  File "/opt/cecisw/arch/easybuild/2020b/software/TensorFlow/2.4.1-foss-2020b/lib/python3.8/site-packages/tensorflow/python/eager/def_function.py", line 634, in wrapped_fn
+    out = weak_wrapped_fn().__wrapped__(*args, **kwds)
+  File "/opt/cecisw/arch/easybuild/2020b/software/TensorFlow/2.4.1-foss-2020b/lib/python3.8/site-packages/tensorflow/python/framework/func_graph.py", line 977, in wrapper
+    raise e.ag_error_metadata.to_exception(e)
+ValueError: in user code:
+
+    /opt/cecisw/arch/easybuild/2020b/software/TensorFlow/2.4.1-foss-2020b/lib/python3.8/site-packages/tensorflow/python/keras/engine/training.py:805 train_function  *
+        return step_function(self, iterator)
+    /opt/cecisw/arch/easybuild/2020b/software/TensorFlow/2.4.1-foss-2020b/lib/python3.8/site-packages/tensorflow/python/keras/engine/training.py:795 step_function  **
+        outputs = model.distribute_strategy.run(run_step, args=(data,))
+    /opt/cecisw/arch/easybuild/2020b/software/TensorFlow/2.4.1-foss-2020b/lib/python3.8/site-packages/tensorflow/python/distribute/distribute_lib.py:1259 run
+        return self._extended.call_for_each_replica(fn, args=args, kwargs=kwargs)
+    /opt/cecisw/arch/easybuild/2020b/software/TensorFlow/2.4.1-foss-2020b/lib/python3.8/site-packages/tensorflow/python/distribute/distribute_lib.py:2730 call_for_each_replica
+        return self._call_for_each_replica(fn, args, kwargs)
+    /opt/cecisw/arch/easybuild/2020b/software/TensorFlow/2.4.1-foss-2020b/lib/python3.8/site-packages/tensorflow/python/distribute/distribute_lib.py:3417 _call_for_each_replica
+        return fn(*args, **kwargs)
+    /opt/cecisw/arch/easybuild/2020b/software/TensorFlow/2.4.1-foss-2020b/lib/python3.8/site-packages/tensorflow/python/keras/engine/training.py:788 run_step  **
+        outputs = model.train_step(data)
+    /opt/cecisw/arch/easybuild/2020b/software/TensorFlow/2.4.1-foss-2020b/lib/python3.8/site-packages/tensorflow/python/keras/engine/training.py:754 train_step
+        y_pred = self(x, training=True)
+    /opt/cecisw/arch/easybuild/2020b/software/TensorFlow/2.4.1-foss-2020b/lib/python3.8/site-packages/tensorflow/python/keras/engine/base_layer.py:998 __call__
+        input_spec.assert_input_compatibility(self.input_spec, inputs, self.name)
+    /opt/cecisw/arch/easybuild/2020b/software/TensorFlow/2.4.1-foss-2020b/lib/python3.8/site-packages/tensorflow/python/keras/engine/input_spec.py:204 assert_input_compatibility
+        raise ValueError('Layer ' + layer_name + ' expects ' +
+
+    ValueError: Layer model expects 3 input(s), but it received 1 input tensors. Inputs received: [<tf.Tensor 'IteratorGetNext:0' shape=(None, None, None) dtype=float32>]
+
+job end at Fri Jun  7 22:30:43 CEST 2024
